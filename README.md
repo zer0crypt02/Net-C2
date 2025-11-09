@@ -539,25 +539,20 @@ HOWEVER:
 4. Push to branch (`git push origin feature/NewFeature`)
 5. Open Pull Request
 
-### 🐛 Questions
+### 🐛 Bug Report
 
+Use GitHub Issues for bug reports:
 
 ```markdown
-**How Long Did It Take To Make?**
-- It took 8 months to make
+**Bug Description:**
+- What happened?
+- Expected behavior?
+- Actual behavior?
 
-**Can everyone use it?**
-- Yes, but please do not clone my project and push it to Github.
-And use it within legal frameworks
-
-**CWhat is your goal for this project?**
-- My goal for this project was to develop a botnet tool for "educational purposes." My goal is to
-further develop it into a "Next Generation" botnet, within legal frameworks.
-
-**On which systems can we run it?**
+**System Information:**
 - OS: [Windows/Linux/macOS]
 - Python Version: [3.8+]
-- Botnet Version: [1.0.0]
+- Botnet Version: [2.0]
 ```
 
 ## 🙏 Thanks
