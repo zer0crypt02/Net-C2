@@ -23,6 +23,7 @@
 - [Command Reference](#-command-reference)
 - [Screenshots](#️-screenshots)
 - [License and Usage](#-license-and-usage)
+- [Questions](#-questions)
 
 ## 🚀 Features
 
@@ -455,6 +456,10 @@ Use GitHub Issues for bug reports:
 - Python Version: [3.8+]
 - Botnet Version: [2.0]
 ```
+
+## 🤔 Questions
+
+### 🏗️ How Long Did It Take to Build?
 
 ## 🙏 Thanks
 
