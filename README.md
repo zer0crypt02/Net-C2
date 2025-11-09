@@ -1,6 +1,4 @@
-# 🤖 Advanced Botnet Framework
-
-> **⚠️ EĞİTİM AMAÇLI PROJE** - Bu proje sadece eğitim ve araştırma amaçlıdır. Kötü amaçlarla kullanılması yasaktır.
+# Net-C2 My Biggest Project...
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-Open%20Source-green.svg)](LICENSE)
