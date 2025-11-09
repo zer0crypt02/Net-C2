@@ -80,7 +80,7 @@ Botnet/
 
 ```mermaid
 graph TD
-    A[Bot - Net.py] -->|Encrypted| B[C2 Server - Server.py]
+    A[Bot - Net.py] -->|AES-256 Encrypted| B[C2 Server - Server.py]
     B -->|Commands| A
     A -->|Keylog Data| C[Kserver.py]
     A -->|Clipboard Data| B
