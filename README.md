@@ -14,15 +14,15 @@
 
 ## 📋 Contents
 
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Security Features](#-security-features)
-- [Web Dashboard](#-web-dashboard)
-- [Command Reference](#-command-reference)
-- [Screenshots](#-screenshots)
-- [License and Usage](#-license-and-usage)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Security Features](#security-features)
+- [Web Dashboard](#web-dashboard)
+- [Command Reference](#command-reference)
+- [Screenshots](#screenshots)
+- [License and Usage](#license-and-usage)
 
 ## 🚀 Features
 
@@ -68,6 +68,7 @@
 Botnet/
 ├── Server.py              # C2 Server (Main Control)
 ├── Net.py                 # Bot Client
+├── Kserver.py             # Keylogger Server (Separate)
 ├── web_dashboard.py       # Web Dashboard
 ├── clipboard_data/        # Clipboard Data
 ├── cookies/              # Browser Cookies
@@ -81,7 +82,7 @@ Botnet/
 graph TD
     A[Bot - Net.py] -->|AES-256 Encrypted| B[C2 Server - Server.py]
     B -->|Commands| A
-    A -->|Keylog Data| B
+    A -->|Keylog Data| C[Kserver.py]
     A -->|Clipboard Data| B
     B -->|Web Dashboard| D[Flask Web App]
     D -->|Real-time Updates| E[Browser]
@@ -138,10 +139,19 @@ python3 Server.py
 **Default Settings:**
 - Host: `0.0.0.0`
 - Port: `8080`
-- Keylogger Port: `8081`
 - Encryption: `AES-256-CBC`
 
-### 2. Start Bot
+### 2. Start Keylogger Server (Optional)
+
+```bash
+python3 Kserver.py
+```
+
+**Default Settings:**
+- Host: `0.0.0.0`
+- Port: `8081`
+
+### 3. Start Bot
 
 ```bash
 python3 Net.py
@@ -154,7 +164,7 @@ export C2_PORT=8080
 python3 Net.py
 ```
 
-### 3. Start Web Dashboard
+### 4. Start Web Dashboard
 
 ```bash
 # From Server.py
