@@ -439,7 +439,7 @@ Check these common issues:
 **Web Dashboard is not working. How to fix?**
 
 - Start the web dashboard with `web start` command in Server.py
-- Access it at `http://localhost:5500`
+- Access it at `http://your_computer_ip:5500`
 - Make sure Flask and Flask-SocketIO are installed
 - Check if port 5500 is available
 
@@ -450,6 +450,20 @@ Check these common issues:
 - `keylogger start/stop` commands control the bot's keylogging
 - `Kserver.py` is a separate server that receives keylog data
 - You need to run Kserver.py separately for keylogger to work
+
+**What is the difference between historical botnets?**
+
+- There is no DGA in the `Net.py` code. and I don't know how to add it. 🤔
+
+- `Evasion.` Escaping antivirus is very, very difficult in `2025`.
+There used to be only `signature-based` antiviruses,
+but now there are `signature-based` + `heuristic-based` antiviruses.
+
+- `Propagation Systems(like a Worm).` I haven't fully understood how viruses spread through ports
+like `SMB, RDP, and SSH`. Viruses like `WannaCry` are professionally written. 🤔
+
+- `Persistence Systems.` I added this before, but it didn't
+go as planned, so I had to remove it. I don't know to how to add it. 🤔
 
 **How do I take screenshots from bots?**
 
