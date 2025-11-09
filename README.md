@@ -551,7 +551,8 @@ HOWEVER:
 And use it within legal frameworks
 
 **CWhat is your goal for this project?**
-- My goal for this project was to develop a botnet tool for "educational purposes." My goal is to further develop it into a "Next Generation" botnet, within legal frameworks.
+- My goal for this project was to develop a botnet tool for "educational purposes." My goal is to
+further develop it into a "Next Generation" botnet, within legal frameworks.
 
 **On which systems can we run it?**
 - OS: [Windows/Linux/macOS]
