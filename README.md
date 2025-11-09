@@ -1,9 +1,8 @@
 <div align="center">
-  <img src="Net-C2.png" alt="Net‑C2 Logo" width="220">
+  <img width="500" height="500" alt="N-C2 Logo (2)" src="https://github.com/user-attachments/assets/f0352d83-656f-4e0f-a8ac-fec3bb61b891" />
   <h1>Net‑C2</h1>
   <i>Flexible and Powerful Botnet Tool</i>
 </div>
-
 ---
 
 # 🤖 Advanced Botnet Framework
