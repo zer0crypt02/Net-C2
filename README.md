@@ -14,68 +14,68 @@
 
 ## 📋 Contents
 
-- [Features](#-Features)
-- [Architectural](#-Architectural)
-- [Setup](#-Setup)
-- [Usage](#-Usage)
-- [Security Features](#-Security-Features)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Security Features](#-security-features)
 - [Web Dashboard](#-web-dashboard)
-- [Command Reference](#-Command-Reference)
-- [Screenshots](#-Screenshots)
-- [License and Usage](#-License-and-Usage)
+- [Command Reference](#-command-reference)
+- [Screenshots](#-screenshots)
+- [License and Usage](#-license-and-usage)
 
 ## 🚀 Features
 
-### 🔐 Güvenlik ve Şifreleme
-- **AES-256-CBC** şifreleme sistemi
-- **Anti-Analysis** sistemleri (Wireshark tespiti)
-- **Tor Network** desteği
-- **IPv6** ve **IPv4** dual-stack desteği
-- **DNS Tunneling** desteği
-- **P2P Network** fallback sistemi
+### 🔐 Security and Encryption
+- **AES-256-CBC** encryption system
+- **Anti-Analysis** systems (Wireshark detection)
+- **Tor Network** support
+- **IPv6** and **IPv4** dual-stack support
+- **DNS Tunneling** support
+- **P2P Network** fallback system
 
-### 🤖 Bot Özellikleri
-- **Cross-Platform** desteği (Windows, Linux, macOS)
-- **Real-time Keylogger** sistemi
-- **Clipboard** izleme ve veri çalma
-- **Browser Cookie** çalma
-- **File Upload/Download** sistemi
-- **Process Monitoring** (gerçek CPU kullanımı)
-- **Screenshot** alma
-- **System Information** toplama
-- **VM Detection** (sanal makine tespiti)
+### 🤖 Bot Features
+- **Cross-Platform** support (Windows, Linux, macOS)
+- **Real-time Keylogger** system
+- **Clipboard** monitoring and data theft
+- **Browser Cookie** stealing
+- **File Upload/Download** system
+- **Process Monitoring** (real CPU usage)
+- **Screenshot** capture
+- **System Information** gathering
+- **VM Detection** (virtual machine detection)
 
 ### 🌐 Web Dashboard
-- **Modern Flask** tabanlı web arayüzü
-- **Real-time** bot durumu takibi
-- **Interactive** komut gönderme
-- **Security Alerts** görüntüleme
-- **P2P Network** durumu
-- **Tor/Clearnet** bot ayrımı
-- **Responsive** tasarım
+- **Modern Flask** based web interface
+- **Real-time** bot status monitoring
+- **Interactive** command sending
+- **Security Alerts** display
+- **P2P Network** status
+- **Tor/Clearnet** bot separation
+- **Responsive** design
 
-### 🔍 Gelişmiş Özellikler
-- **Network Mapping** (ağ keşfi)
-- **Vulnerability Scanner** entegrasyonu
-- **Multi-threaded** işlemler
-- **Automatic reconnection** sistemi
-- **Environment variable** desteği
-- **Comprehensive help** sistemi
+### 🔍 Advanced Features
+- **Network Mapping** (network discovery)
+- **Vulnerability Scanner** integration
+- **Multi-threaded** operations
+- **Automatic reconnection** system
+- **Environment variable** support
+- **Comprehensive help** system
 
-## 🏗️ Mimari
+## 🏗️ Architecture
 
 ```
 Botnet/
-├── Server.py              # C2 Sunucu (Ana Kontrol)
-├── Net.py                 # Bot İstemcisi
+├── Server.py              # C2 Server (Main Control)
+├── Net.py                 # Bot Client
 ├── web_dashboard.py       # Web Dashboard
-├── clipboard_data/        # Clipboard Verileri
+├── clipboard_data/        # Clipboard Data
 ├── cookies/              # Browser Cookies
-├── downloads/            # İndirilen Dosyalar
+├── downloads/            # Downloaded Files
 └── README.md
 ```
 
-### 🔄 İletişim Akışı
+### 🔄 Communication Flow
 
 ```mermaid
 graph TD
@@ -90,26 +90,26 @@ graph TD
     A -->|DNS Tunnel| H[DNS Server]
 ```
 
-## 📦 Kurulum
+## 📦 Installation
 
-### Gereksinimler
+### Requirements
 
 ```bash
-# Python 3.8+ gerekli
+# Python 3.8+ required
 python3 --version
 
-# Gerekli paketler
+# Required packages
 pip install pycryptodome pynput flask requests stem psutil browser-cookie3
 ```
 
-### Hızlı Kurulum
+### Quick Installation
 
 ```bash
-# Repository'yi klonla
+# Clone repository
 git clone https://github.com/yourusername/botnet-framework.git
 cd botnet-framework
 
-# Gerekli paketleri yükle
+# Install required packages
 pip install -r requirements.txt
 ```
 
@@ -127,21 +127,21 @@ browser-cookie3>=0.15.0
 dnslib>=0.9.0
 ```
 
-## 🎯 Kullanım
+## 🎯 Usage
 
-### 1. C2 Sunucuyu Başlat
+### 1. Start C2 Server
 
 ```bash
 python3 Server.py
 ```
 
-**Varsayılan Ayarlar:**
+**Default Settings:**
 - Host: `0.0.0.0`
 - Port: `8080`
 - Keylogger Port: `8081`
 - Encryption: `AES-256-CBC`
 
-### 2. Bot'u Başlat
+### 2. Start Bot
 
 ```bash
 python3 Net.py
@@ -154,24 +154,24 @@ export C2_PORT=8080
 python3 Net.py
 ```
 
-### 3. Web Dashboard'u Başlat
+### 3. Start Web Dashboard
 
 ```bash
-# Server.py içinden
+# From Server.py
 web start
 
-# Erişim: http://localhost:5500
+# Access: http://localhost:5500
 ```
 
-## 🔒 Güvenlik Özellikleri
+## 🔒 Security Features
 
-### 🔐 Şifreleme Sistemi
+### 🔐 Encryption System
 
-- **AES-256-CBC**: Ana şifreleme katmanı
-- **Otomatik key generation**: Güvenli anahtar üretimi
-- **Encrypted communication**: Tüm iletişim şifreli
+- **AES-256-CBC**: Main encryption layer
+- **Automatic key generation**: Secure key generation
+- **Encrypted communication**: All communication encrypted
 
-### 🛡️ Anti-Analysis Sistemi
+### 🛡️ Anti-Analysis System
 
 ```python
 # Wireshark tespiti
@@ -180,104 +180,104 @@ if self.check_for_analysis_tools():
     self.send_analysis_alert()
 ```
 
-### 🔄 Güvenlik Kuralları
+### 🔄 Security Rules
 
-1. **Rule #1**: C2 Bağlı → P2P KAPALI
-2. **Rule #2**: Analysis Tool Tespit → Güvenlik Modu
-3. **Rule #3**: C2 Başarısız → Fallback Channels
+1. **Rule #1**: C2 Connected → P2P OFF
+2. **Rule #2**: Analysis Tool Detected → Security Mode
+3. **Rule #3**: C2 Failed → Fallback Channels
 
-### 🌐 Tor Network Desteği
+### 🌐 Tor Network Support
 
 ```bash
-# Tor komutları
-tor enable    # Tor'u etkinleştir
-tor disable   # Tor'u devre dışı bırak
-tor status    # Tor durumunu kontrol et
-tor bots      # Tor üzerinden bağlanan botları listele
+# Tor commands
+tor enable    # Enable Tor
+tor disable   # Disable Tor
+tor status    # Check Tor status
+tor bots      # List bots connected via Tor
 ```
 
 ### 🔍 DNS Tunneling
 
 ```bash
-# DNS Tunneling komutları
-dns_tunnel enable example.com    # DNS tunneling'i etkinleştir
-dns_tunnel disable              # DNS tunneling'i devre dışı bırak
-dns_tunnel status              # DNS tunneling durumu
+# DNS Tunneling commands
+dns_tunnel enable example.com    # Enable DNS tunneling
+dns_tunnel disable              # Disable DNS tunneling
+dns_tunnel status              # DNS tunneling status
 ```
 
 ## 🌐 Web Dashboard
 
-### 📊 Ana Özellikler
+### 📊 Main Features
 
-- **Real-time Bot Monitoring**: Canlı bot durumu takibi
-- **Interactive Command Interface**: Web üzerinden komut gönderme
-- **Security Alerts Display**: Güvenlik uyarılarını görüntüleme
-- **Modern UI**: Cyberpunk temalı modern arayüz
-- **Responsive Design**: Mobil uyumlu tasarım
+- **Real-time Bot Monitoring**: Live bot status tracking
+- **Interactive Command Interface**: Web-based command sending
+- **Security Alerts Display**: Security alerts visualization
+- **Modern UI**: Cyberpunk themed modern interface
+- **Responsive Design**: Mobile-friendly design
 
-### 🎨 Arayüz Özellikleri
+### 🎨 Interface Features
 
-- **Dark Theme**: Göz yormayan koyu tema
-- **Purple Color Scheme**: Mor renk paleti
-- **Real-time Updates**: Anlık veri güncellemeleri
-- **Interactive Cards**: Etkileşimli kart tasarımı
+- **Dark Theme**: Eye-friendly dark theme
+- **Purple Color Scheme**: Purple color palette
+- **Real-time Updates**: Instant data updates
+- **Interactive Cards**: Interactive card design
 
-## 📋 Komut Referansı
+## 📋 Command Reference
 
-### 🔧 Temel Komutlar
+### 🔧 Basic Commands
 
 ```bash
-# Bot listesi
+# Bot list
 list
 
-# Bot bilgileri
+# Bot information
 server
 
-# Komut gönderme
+# Send command
 cmd <bot_id> <command>
 
-# Broadcast komut
+# Broadcast command
 broadcast <command>
 
-# Process listesi (gerçek CPU kullanımı ile)
+# Process list (with real CPU usage)
 processes <bot_id>
 
-# Sistem bilgileri
+# System information
 sysinfo <bot_id>
 
-# VM kontrolü
+# VM check
 isvm <bot_id>
 ```
 
-### 📁 Dosya İşlemleri
+### 📁 File Operations
 
 ```bash
-# Dosya yükleme
+# File upload
 upload <bot_id> <local_file> [remote_name]
 
-# Dosya indirme
+# File download
 download <bot_id> <remote_file> [local_path]
 
-# Ekran görüntüsü
+# Screenshot
 screenshot <bot_id>
 ```
 
-### 🔍 Veri Toplama
+### 🔍 Data Collection
 
 ```bash
-# Cookie çalma
+# Cookie stealing
 cookies <bot_id>
 
-# Clipboard başlat/durdur
+# Clipboard start/stop
 copy start <bot_id>
 copy stop <bot_id>
 
-# Keylogger başlat/durdur
+# Keylogger start/stop
 keylogger start <bot_id>
 keylogger stop <bot_id>
 ```
 
-### 🌐 Ağ Komutları
+### 🌐 Network Commands
 
 ```bash
 # Network mapping
@@ -286,33 +286,33 @@ network_map status <bot_id>
 network_map stop <bot_id>
 ```
 
-### 🔍 Güvenlik Komutları
+### 🔍 Security Commands
 
 ```bash
-# Güvenlik durumu
+# Security status
 security
 
-# Uyarıları görüntüle
+# View alerts
 alerts
 
-# P2P durumu
+# P2P status
 p2p status
 ```
 
-### ❓ Help Sistemi
+### ❓ Help System
 
 ```bash
-# Herhangi bir komut için help
+# Help for any command
 <command> ?
 
-# Örnekler:
+# Examples:
 processes ?
 keylogger ?
 upload ?
 tor ?
 ```
 
-## 🖼️ Ekran Görüntüleri
+## 🖼️ Screenshots
 
 ### C2 Server Terminal
 ```
@@ -335,18 +335,18 @@ tor ?
 ```
 
 ### Web Dashboard
-- Modern cyberpunk temalı arayüz
-- Real-time bot durumu
-- Interactive komut paneli
-- Güvenlik uyarıları
-- P2P network durumu
+- Modern cyberpunk themed interface
+- Real-time bot status
+- Interactive command panel
+- Security alerts
+- P2P network status
 
-## 🔧 Gelişmiş Özellikler
+## 🔧 Advanced Features
 
 ### 🔄 P2P Network
 
 ```python
-# P2P ağını başlat
+# Start P2P network
 p2p_result = bot.start_p2p()
 print(f"P2P Port: {bot.p2p_port}")
 print(f"IPv6 Support: {bot.ipv6_enabled}")
@@ -355,119 +355,119 @@ print(f"IPv6 Support: {bot.ipv6_enabled}")
 ### 📊 Process Monitoring
 
 ```python
-# Gerçek CPU kullanımı ile process listesi
+# Process list with real CPU usage
 processes = bot.get_processes_with_real_cpu()
 ```
 
 ### 🔍 System Analysis
 
 ```python
-# Detaylı sistem analizi
+# Detailed system analysis
 system_info = bot.gather_system_info()
 vm_check = bot.check_vm_environment()
 ```
 
-## 🚨 Güvenlik Uyarıları
+## 🚨 Security Warnings
 
-### ⚠️ Önemli Notlar
+### ⚠️ Important Notes
 
-1. **Bu proje sadece eğitim ve araştırma amaçlıdır**
-2. **Kötü amaçlarla kullanım kesinlikle yasaktır**
-3. **Kullanıcı tüm sorumluluğu kabul eder**
-4. **Yasal sınırlar içinde kullanılmalıdır**
-5. **Sadece kendi sistemlerinizde test edin**
+1. **This project is for educational and research purposes only**
+2. **Malicious use is strictly prohibited**
+3. **User accepts all responsibility**
+4. **Must be used within legal boundaries**
+5. **Test only on your own systems**
 
-### 🔒 Güvenlik Önlemleri
+### 🔒 Security Measures
 
-- Tüm iletişim AES-256 ile şifrelenir
-- Anti-analysis sistemleri aktif
-- VM detection mevcut
-- Güvenlik kuralları otomatik çalışır
+- All communication encrypted with AES-256
+- Anti-analysis systems active
+- VM detection available
+- Security rules work automatically
 
-## 📄 Lisans ve Kullanım
+## 📄 License and Usage
 
-### 📜 Telif Hakkı
+### 📜 Copyright
 
-**Bu kod tamamen bana aittir (Fatih Emre).** 
+**This code belongs entirely to me (Fatih Emre).** 
 
-### ✅ İzin Verilen Kullanımlar
+### ✅ Permitted Uses
 
-- ✅ **Eğitim amaçlı** kullanım
-- ✅ **Araştırma** amaçlı kullanım  
-- ✅ **Kişisel öğrenme** için kullanım
-- ✅ **Güvenlik testleri** (sadece kendi sistemlerinizde)
-- ✅ **Kod inceleme** ve öğrenme
-- ✅ **Fork** yapma ve geliştirme
+- ✅ **Educational** use
+- ✅ **Research** use  
+- ✅ **Personal learning** use
+- ✅ **Security testing** (only on your own systems)
+- ✅ **Code review** and learning
+- ✅ **Forking** and development
 
-### ❌ Kesinlikle Yasak Olan Kullanımlar
+### ❌ Strictly Prohibited Uses
 
-- ❌ **Bu kodu "kendi yaptım" diye yayınlamak**
-- ❌ **Telif hakkı bilgilerini kaldırmak**
-- ❌ **Ticari amaçlı kullanım** (izin almadan)
-- ❌ **Kötü amaçlı kullanım**
-- ❌ **Başkalarının sistemlerine saldırı**
-- ❌ **Yasal olmayan faaliyetler**
+- ❌ **Publishing this code claiming "I made it"**
+- ❌ **Removing copyright information**
+- ❌ **Commercial use** (without permission)
+- ❌ **Malicious use**
+- ❌ **Attacking others' systems**
+- ❌ **Illegal activities**
 
-### 🔒 Kullanım Şartları
+### 🔒 Terms of Use
 
 ```
-MIT License ile açık kaynak olarak paylaşılmıştır.
+Shared as open source under MIT License.
 
-ANCAK:
-- Kod sahibi: Fatih Emre
-- Bu kodu başkasının yapmış gibi göstermek YASAKTIR
-- Telif hakkı bilgileri korunmalıdır
-- Kötü amaçlı kullanım yasaktır
+HOWEVER:
+- Code owner: Fatih Emre
+- Claiming this code as your own work is PROHIBITED
+- Copyright information must be preserved
+- Malicious use is prohibited
 ```
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-### 📝 Katkı Süreci
+### 📝 Contribution Process
 
-1. Fork yapın
-2. Feature branch oluşturun (`git checkout -b feature/YeniOzellik`)
-3. Commit yapın (`git commit -m 'Yeni özellik eklendi'`)
-4. Push yapın (`git push origin feature/YeniOzellik`)
-5. Pull Request açın
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/NewFeature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to branch (`git push origin feature/NewFeature`)
+5. Open Pull Request
 
 ### 🐛 Bug Report
 
-Hata bildirimi için GitHub Issues kullanın:
+Use GitHub Issues for bug reports:
 
 ```markdown
-**Hata Açıklaması:**
-- Ne oldu?
-- Beklenen davranış?
-- Gerçekleşen davranış?
+**Bug Description:**
+- What happened?
+- Expected behavior?
+- Actual behavior?
 
-**Sistem Bilgileri:**
+**System Information:**
 - OS: [Windows/Linux/macOS]
 - Python Version: [3.8+]
 - Botnet Version: [2.0]
 ```
 
-## 🙏 Teşekkürler
+## 🙏 Thanks
 
-- **Python Community** - Harika kütüphaneler için
-- **Security Researchers** - Güvenlik araştırmaları için
-- **Open Source Community** - İlham ve motivasyon için
+- **Python Community** - For amazing libraries
+- **Security Researchers** - For security research
+- **Open Source Community** - For inspiration and motivation
 
-## 📞 İletişim
+## 📞 Contact
 
-- **GitHub:** Bu repository üzerinden
-- **Issues:** GitHub Issues kullanın
+- **GitHub:** Through this repository
+- **Issues:** Use GitHub Issues
 - **Discussions:** GitHub Discussions
 
 ---
 
 <div align="center">
 
-**⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın! ⭐**
+**⭐ If you liked this project, don't forget to give it a star! ⭐**
 
-**🔥 Kod tamamen bana aittir - Fatih Emre 🔥**
+**🔥 This code belongs entirely to me - Fatih Emre 🔥**
 
-*Eğitim amaçlı geliştirilmiştir. Sorumlu kullanın.*
+*Developed for educational purposes. Use responsibly.*
 
-**⚠️ Bu kodu "kendi yaptım" diye yayınlamak YASAKTIR! ⚠️**
+**⚠️ Publishing this code claiming "I made it" is PROHIBITED! ⚠️**
 
 </div>
