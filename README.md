@@ -409,6 +409,20 @@ vm_check = bot.check_vm_environment()
 
 ### 🚀 Getting Started
 
+**What is the difference between historical botnets?**
+
+- There is no DGA in the `Net.py` code. and I don't know how to add it. 🤔
+
+- `Evasion.` Escaping antivirus is very, very difficult in `2025`.
+There used to be only `signature-based` antiviruses,
+but now there are `signature-based` + `heuristic-based` antiviruses.
+
+- `Propagation Systems(like a Worm).` I haven't fully understood how viruses spread through ports
+like `SMB, RDP, and SSH`. Viruses like `WannaCry` are professionally written. 🤔
+
+- `Persistence Systems.` I added this before, but it didn't
+go as planned, so I had to remove it. I don't know to how to add it. 🤔
+
 **How do I start the botnet system?**
 
 Follow these steps in order:
@@ -444,26 +458,6 @@ Check these common issues:
 - Check if port 5500 is available
 
 ### 🔑 Keylogger & Screenshots
-
-**What is the difference between keylogger and Kserver.py?**
-
-- `keylogger start/stop` commands control the bot's keylogging
-- `Kserver.py` is a separate server that receives keylog data
-- You need to run Kserver.py separately for keylogger to work
-
-**What is the difference between historical botnets?**
-
-- There is no DGA in the `Net.py` code. and I don't know how to add it. 🤔
-
-- `Evasion.` Escaping antivirus is very, very difficult in `2025`.
-There used to be only `signature-based` antiviruses,
-but now there are `signature-based` + `heuristic-based` antiviruses.
-
-- `Propagation Systems(like a Worm).` I haven't fully understood how viruses spread through ports
-like `SMB, RDP, and SSH`. Viruses like `WannaCry` are professionally written. 🤔
-
-- `Persistence Systems.` I added this before, but it didn't
-go as planned, so I had to remove it. I don't know to how to add it. 🤔
 
 **How do I take screenshots from bots?**
 
