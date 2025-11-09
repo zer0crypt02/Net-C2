@@ -14,7 +14,7 @@
 
 ## 📋 İçindekiler
 
-- [Features](#-özellikler)
+- [Features](#-Features)
 - [Architectural](#-mimari)
 - [Setup](#-kurulum)
 - [Usage](#-kullanım)
