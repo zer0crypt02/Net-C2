@@ -572,6 +572,7 @@ further develop it into a "Next Generation" botnet, within legal frameworks.
 - **GitHub:** Through this repository
 - **Issues:** Use GitHub Issues
 - **Discussions:** GitHub Discussions
+- **Instagram:** @zer0crypt0
 
 ---
 
