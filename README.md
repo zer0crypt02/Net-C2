@@ -12,17 +12,17 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](https://github.com)
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com)
 
-## 📋 İçindekiler
+## 📋 Contents
 
 - [Features](#-Features)
-- [Architectural](#-mimari)
-- [Setup](#-kurulum)
-- [Usage](#-kullanım)
-- [Security Features](#-güvenlik-özellikleri)
+- [Architectural](#-Architectural)
+- [Setup](#-Setup)
+- [Usage](#-Usage)
+- [Security Features](#-Security-Features)
 - [Web Dashboard](#-web-dashboard)
-- [Command Reference](#-komut-referansı)
-- [Screenshots](#-ekran-görüntüleri)
-- [License and Use](#-lisans-ve-kullanım)
+- [Command Reference](#-Command-Reference)
+- [Screenshots](#-Screenshots)
+- [License and Usage](#-License-and-Usage)
 
 ## 🚀 Features
 
