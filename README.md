@@ -565,6 +565,7 @@ further develop it into a "Next Generation" botnet, within legal frameworks.
 - **Python Community** - For amazing libraries
 - **Security Researchers** - For security research
 - **Open Source Community** - For inspiration and motivation
+- **And to everyone who supports me 🫂**
 
 ## 📞 Contact
 
