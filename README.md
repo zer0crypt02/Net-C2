@@ -587,6 +587,8 @@ HOWEVER:
 3. Commit your changes (`git commit -m 'Add new feature'`)
 4. Push to branch (`git push origin feature/NewFeature`)
 5. Open Pull Request
+6. If you would like to collaborate, you can
+write on Instagram.
 
 ### 🐛 Bug Report
 
