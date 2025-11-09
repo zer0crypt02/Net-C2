@@ -71,8 +71,8 @@ Botnet/
 ├── Kserver.py             # Keylogger Server (Separate)
 ├── web_dashboard.py       # Web Dashboard
 ├── clipboard_data/        # Clipboard Data
-├── cookies/              # Browser Cookies
-├── downloads/            # Downloaded Files
+├── cookies/               # Browser Cookies
+├── downloads/             # Downloaded Files
 └── README.md
 ```
 
