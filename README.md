@@ -3,9 +3,9 @@
   <i>[Flexible and Powerful Botnet Tool]</i>
 </div>
 
-# 🤖 Advanced Botnet Framework
+# Net-C2, My Biggest and Best Project
 
-> **⚠️ EĞİTİM AMAÇLI PROJE** - Bu proje sadece eğitim ve araştırma amaçlıdır. Kötü amaçlarla kullanılması yasaktır.
+> **This is for educational purposes only ⚠️** - Abuse of this project is prohibited. I am not responsible for this.
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-Open%20Source-green.svg)](LICENSE)
