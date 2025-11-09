@@ -1,6 +1,6 @@
 <div align="center">
 <img height="128" alt="Image Enhancement Upscale" src="https://github.com/user-attachments/assets/132965ae-1eea-4143-9a20-e2bfaefca6d6" />  <h1>Net‑C2</h1>
-  <i>Flexible and Powerful Botnet Tool</i>
+  <i>[Flexible and Powerful Botnet Tool]</i>
 </div>
 
 # 🤖 Advanced Botnet Framework
