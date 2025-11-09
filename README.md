@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="200" height="200" alt="N-C2 Logo (2)" src="https://github.com/user-attachments/assets/f0352d83-656f-4e0f-a8ac-fec3bb61b891" />
+<img width="152" height="166" alt="Net-C2" src="https://github.com/user-attachments/assets/27c8a2e1-a7d1-4190-aaea-121451fd245c" />
   <h1>Net‑C2</h1>
   <i>Flexible and Powerful Botnet Tool</i>
 </div>
