@@ -14,15 +14,15 @@
 
 ## 📋 Contents
 
-- [Features](#features)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Security Features](#security-features)
-- [Web Dashboard](#web-dashboard)
-- [Command Reference](#command-reference)
-- [Screenshots](#screenshots)
-- [License and Usage](#license-and-usage)
+- [Features](#-features)
+- [Architecture](#️-architecture)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Security Features](#-security-features)
+- [Web Dashboard](#-web-dashboard)
+- [Command Reference](#-command-reference)
+- [Screenshots](#️-screenshots)
+- [License and Usage](#-license-and-usage)
 
 ## 🚀 Features
 
