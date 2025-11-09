@@ -1,4 +1,14 @@
-# Net-C2 My Biggest Project...
+<div align="center">
+  <img src="Net-C2.png" alt="Net‑C2 Logo" width="220">
+  <h1>Net‑C2</h1>
+  <i>Flexible and Powerful Botnet Tool</i>
+</div>
+
+---
+
+# 🤖 Advanced Botnet Framework
+
+> **⚠️ EĞİTİM AMAÇLI PROJE** - Bu proje sadece eğitim ve araştırma amaçlıdır. Kötü amaçlarla kullanılması yasaktır.
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-Open%20Source-green.svg)](LICENSE)
