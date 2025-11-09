@@ -14,17 +14,17 @@
 
 ## 📋 İçindekiler
 
-- [Özellikler](#-özellikler)
-- [Mimari](#-mimari)
-- [Kurulum](#-kurulum)
-- [Kullanım](#-kullanım)
-- [Güvenlik Özellikleri](#-güvenlik-özellikleri)
+- [Features](#-özellikler)
+- [Architectural](#-mimari)
+- [Setup](#-kurulum)
+- [Usage](#-kullanım)
+- [Security Features](#-güvenlik-özellikleri)
 - [Web Dashboard](#-web-dashboard)
-- [Komut Referansı](#-komut-referansı)
-- [Ekran Görüntüleri](#-ekran-görüntüleri)
-- [Lisans ve Kullanım](#-lisans-ve-kullanım)
+- [Command Reference](#-komut-referansı)
+- [Screenshots](#-ekran-görüntüleri)
+- [License and Use](#-lisans-ve-kullanım)
 
-## 🚀 Özellikler
+## 🚀 Features
 
 ### 🔐 Güvenlik ve Şifreleme
 - **AES-256-CBC** şifreleme sistemi
