@@ -371,6 +371,7 @@ tor ?
 [+] Keylogger server started on 192.168.237.191:8081
 [+] New bot connected: Fatihs-MacBook-Pro.xxxxx (192.168.x.x)
 ```
+![C2 Server](ScreenShots/Net5.png)
 
 ### Web Dashboard
 - Modern cyberpunk themed interface
