@@ -369,7 +369,7 @@ tor ?
 
 [+] Server started on 0.0.0.0:8080
 [+] Keylogger server started on 192.168.237.191:8081
-[+] New bot connected: Fatihs-MacBook-Pro.local-xxxxx (192.168.237.191)
+[+] New bot connected: Fatihs-MacBook-Pro.xxxxx (192.168.x.x)
 ```
 
 ### Web Dashboard
