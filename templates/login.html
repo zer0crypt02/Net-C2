@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net-C2 | Authentication</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #E040FB;
+            --secondary: #9C27B0;
+            --dark: #0a0a0a;
+            --surface: #1a1a2e;
+            --text: #e0e0e0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a0a1f 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 40px;
+            width: 400px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px rgba(224, 64, 251, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), transparent, var(--secondary));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .brand p {
+            color: var(--secondary);
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .form-control {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--secondary);
+            color: var(--text);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+
+        .form-control:focus {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(224, 64, 251, 0.5);
+            color: white;
+        }
+
+        .btn-auth {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            border: none;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-auth:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .error-msg {
+            color: #ff4d4d;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        /* Glitch effect for text */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(224, 64, 251, 0.5);
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="brand">
+             <h1 class="glitch" data-text="NET-C2">NET-C2</h1>
+             <p>SECURE COMMAND CENTER</p>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-danger py-2 small" style="background: rgba(255,0,0,0.1); border-color: red; color: #ff6666;">
+              {{ messages[0] }}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form action="/login" method="post">
+            <div class="mb-3">
+                <label class="form-label small text-secondary">ACCESS USER</label>
+                <input type="text" name="username" class="form-control" placeholder="Identify yourself..." required autofocus>
+            </div>
+            <div class="mb-3">
+                <label class="form-label small text-secondary">ENCRYPTED KEY</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-auth">AUTHORIZE</button>
+        </form>
+
+        <div class="login-footer">
+            &copy; 2025 ZER0 CRYPT0 TERMINAL
+        </div>
+    </div>
+</body>
+</html>

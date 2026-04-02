@@ -252,6 +252,35 @@ def get_banner():
                                      version: 1.0
         """
 
+from flask import session, flash, redirect, url_for
+
+# Authentication Settings
+DASHBOARD_USER = "admin"
+DASHBOARD_PASS = "admin" # USER MUST CHANGE THIS
+
+@app.before_request
+def check_auth():
+    if request.path.startswith('/static') or request.path == '/login':
+        return
+    if not session.get('authorized'):
+        return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user = request.form.get('username')
+        pw = request.form.get('password')
+        if user == DASHBOARD_USER and pw == DASHBOARD_PASS:
+            session['authorized'] = True
+            return redirect(url_for('dashboard'))
+        flash('Invalid credentials')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
 @app.route('/')
 def dashboard():
     """Ana dashboard sayfası"""
